@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+		<form action="alta" method="post">
+			Introduce URL:<input type="text" name="url"><br><br>
+			Introduce Temática:<input type="text" name="tematica"><br><br>
+			Introduce Descripción:<input type="text" name="descripcion"><br><br>
+			<input type="submit" value="Guardar"><br><br>
+			<div th:text="${errorMsg}"></div>		
+		</form>
+	</center>
+</body>
+</html>
