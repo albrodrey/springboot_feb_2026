@@ -1,8 +1,8 @@
 package init.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import init.model.Alumno;
@@ -20,7 +20,7 @@ public class AlumnosServiceImpl implements AlumnosService {
 
 	@Override
 	public boolean altaAlumno(Alumno alumno) {
-		if(alumnosRepository.findFirstByNombreAndCurso(alumno.getNombre(), alumno.getCurso())==null) {
+		if(alumnosRepository.findFirstByNombreAndCurso(alumno.getNombre(), alumno.getCurso()).isEmpty()) {
 			alumnosRepository.save(alumno);
 			return true;
 		}
@@ -39,12 +39,12 @@ public class AlumnosServiceImpl implements AlumnosService {
 
 	@Override
 	public Alumno eliminarAlumno(String email) {
-		Alumno alumno=alumnosRepository.findFirstByEmail(email);
-		if(alumno!=null) {
+		Optional<Alumno> alumno=alumnosRepository.findFirstByEmail(email);
+		if(alumno.isPresent()) {
 			alumnosRepository.deleteByEmail(email);
 			
 		}
-		return alumno;
+		return alumno.orElse(new Alumno());
 		
 	}
 
