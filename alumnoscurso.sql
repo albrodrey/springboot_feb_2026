@@ -43,6 +43,32 @@ LOCK TABLES `alumnos` WRITE;
 INSERT INTO `alumnos` VALUES (3,'a3','Python','a3@gmail.com',5.5),(4,'a4','Angular','a4@gmail.com',4.5),(11,'wewe','Java','ttttt@gmail.com',7.4),(12,'keyc','Java','keyc@gmail.com',9),(13,'keycsds','Java','keyssc@gmail.com',9),(14,'keyddddcsds','Java','kedddyssc@gmail.com',9),(15,'zzkeayfc','Java','aakeayf@gmail.com',9),(16,'jwt','Java','jwt@gmail.com',9),(18,'kafka','Python','kaafka@gmail.com',7.4),(19,'wert','Kafka','wert@gmail.com',7.4),(20,'gty','Kafka','gty@gmail.com',6),(29,'z4','Angular','z4@gmail.com',2.4),(30,'mayya1','Java','maya1@gmail.com',7.4),(35,'postman','Java','post@gmail.com',10),(38,'apache','Kafka','apache@gmail.com',9),(81,'remote','HTML','remote@gmail.com',6),(82,'ffggggg','Java','awasd@gmail.com',8),(85,'este es nuevo','Java','keyc@gmail.com',9),(92,'aws3','Python','a3@gmail.com',5.5),(105,'new','Java','newjava@gmail.com',9),(106,'seguro','Python','seguro@gmail.com',10);
 /*!40000 ALTER TABLE `alumnos` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `ediciones`
+--
+
+DROP TABLE IF EXISTS `ediciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ediciones` (
+  `codigoCurso` int NOT NULL,
+  `dia` int NOT NULL,
+  `totalAlumnos` int DEFAULT NULL,
+  `horario` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codigoCurso`,`dia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ediciones`
+--
+
+LOCK TABLES `ediciones` WRITE;
+/*!40000 ALTER TABLE `ediciones` DISABLE KEYS */;
+INSERT INTO `ediciones` VALUES (5,23,15,'mañana'),(6,23,14,'tarde'),(11,30,18,'mañana');
+/*!40000 ALTER TABLE `ediciones` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -53,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-25 11:32:03
+-- Dump completed on 2026-02-25 12:18:56
