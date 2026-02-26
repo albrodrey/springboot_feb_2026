@@ -1,6 +1,7 @@
 package init.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,7 +20,7 @@ public interface AlumnosRepository extends JpaRepository<Alumno,Integer>{
 	
 	List<Alumno> findByCurso(String curso);
 	
-	Alumno findFirstByNombreAndCurso(String nombre, String curso);
+	Optional<Alumno> findFirstByNombreAndCurso(String nombre, String curso);
 	boolean existsByNombreAndCurso(String nombre, String curso);
 	
 	@Query("select distinct(a.curso) from Alumno a")
@@ -28,7 +29,7 @@ public interface AlumnosRepository extends JpaRepository<Alumno,Integer>{
 	
 	
 	
-	Alumno findFirstByEmail(String email);
+	Optional<Alumno> findFirstByEmail(String email);
 	@Modifying
 	@Transactional
 	void deleteByEmail(String email);

@@ -27,7 +27,7 @@ public class AlumnosController {
 	@PostMapping(value="alumnos",consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> alta(@RequestBody Alumno alumno) {
 		if(alumnosService.altaAlumno(alumno)) {
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
