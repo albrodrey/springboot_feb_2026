@@ -13,6 +13,6 @@ public class MapeadorItemDto {
 	}
 	
 	public Item toEntity(ItemDto item) {
-		return new Item(0,item.getUrl(),item.getTematica(),item.getDescripcion());
+		return new Item(null,item.getUrl(),item.getTematica(),item.getDescripcion());
 	}
 }

@@ -41,7 +41,7 @@ public class AlumnosController {
 		
 	}
 	@GetMapping(value="alumnos/por-curso",produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Alumno>> alumnoscurso(@RequestParam("curso") String curso) {
+	public ResponseEntity<List<Alumno>> alumnoscurso(@RequestParam String curso) {
 		return new ResponseEntity<>(alumnosService.alumnosCurso(curso),HttpStatus.OK);
 	}
 	@DeleteMapping(value="alumnos",produces=MediaType.APPLICATION_JSON_VALUE)

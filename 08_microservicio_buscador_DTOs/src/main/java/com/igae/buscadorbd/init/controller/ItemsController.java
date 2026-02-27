@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.igae.buscadorbd.init.dtos.ItemDto;
 import com.igae.buscadorbd.init.model.Item;
 import com.igae.buscadorbd.init.service.ItemsService;
 
@@ -31,7 +32,7 @@ public class ItemsController {
 	}
 	@Operation(summary = "Lista de items por temática",description = "A partir de la temática recibida como prámetro, devuelve los items correspondientes")
 	@GetMapping(value="items",produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Item>> buscarPorTematica(@Parameter(description = "Nombre de la temática de búsqueda") @RequestParam String tematica){
+	public ResponseEntity<List<ItemDto>> buscarPorTematica(@Parameter(description = "Nombre de la temática de búsqueda") @RequestParam String tematica){
 		return new ResponseEntity<>(itemsService.buscarPorTematica(tematica),HttpStatus.OK);
 	}
 	
@@ -40,7 +41,7 @@ public class ItemsController {
 		@ApiResponse(responseCode = "409", description = "No se pudo crear el alumno (conflicto)", content = @Content)
 	})
 	@PostMapping(value="items",consumes=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> altaItem(@RequestBody Item item) {
+	public ResponseEntity<Void> altaItem(@RequestBody ItemDto item) {
 		if(itemsService.nuevoItem(item)) {
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}

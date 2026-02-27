@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.igae.buscadorbd.init.model.Item;
 
@@ -18,22 +18,22 @@ public class ItemsRepositoryTest {
 	void testFindByTematica() {
 		itemsRepository.deleteAll();
 
-        itemsRepository.save(new Item(0, "url1", "java", "desc1"));
-        itemsRepository.save(new Item(0, "url2", "java", "desc2"));
-        itemsRepository.save(new Item(0, "url3", "spring", "desc3"));
+        itemsRepository.save(new Item(null,"url1", "java", "desc1"));
+        itemsRepository.save(new Item(null,"url2", "java", "desc2"));
+        itemsRepository.save(new Item(null,"url3", "spring", "desc3"));
 
         List<Item> javaItems = itemsRepository.findByTematica("java");
-        //List<Item> pythonItems = itemsRepository.findByTematica("python");
+        List<Item> pythonItems = itemsRepository.findByTematica("python");
         assertThat(javaItems).hasSize(2)
             .extracting(Item::getUrl)
             .containsExactlyInAnyOrder("url1", "url2");
-        //assertThat(pythonItems).hasSize(0);
+        assertThat(pythonItems).hasSize(0);
 	}
 	@Test
 	void testFindFirstByUrl() {
 		itemsRepository.deleteAll();
 
-        itemsRepository.save(new Item(0, "unique-url", "testing", "desc"));
+        itemsRepository.save(new Item(null, "unique-url", "testing", "desc"));
 
         Item found = itemsRepository.findFirstByUrl("unique-url");
 
@@ -44,9 +44,9 @@ public class ItemsRepositoryTest {
 	void testDeleteByUrl() {
 		itemsRepository.deleteAll();
 
-        itemsRepository.save(new Item(0, "u1", "db", "d1"));
-        itemsRepository.save(new Item(0, "u2", "db", "d2"));
-        itemsRepository.save(new Item(0, "u3", "other", "d3"));
+        itemsRepository.save(new Item(null, "u1", "db", "d1"));
+        itemsRepository.save(new Item(null, "u2", "db", "d2"));
+        itemsRepository.save(new Item(null, "u3", "other", "d3"));
 
         
         itemsRepository.deleteByUrl("u2");

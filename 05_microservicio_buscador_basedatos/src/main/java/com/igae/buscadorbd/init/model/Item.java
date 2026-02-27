@@ -24,6 +24,13 @@ public class Item {
 		this.tematica = tematica;
 		this.descripcion = descripcion;
 	}
+	public Item( String url, String tematica, String descripcion) {
+		super();
+		
+		this.url = url;
+		this.tematica = tematica;
+		this.descripcion = descripcion;
+	}
 	public Item() {
 		super();
 	}
