@@ -22,6 +22,10 @@ public class EstudiantesServiceImpl implements EstudiantesService {
 
 	@Override
 	public List<Estudiante> estudiantesRango(double min, double max) {
+		if(min>max) {
+			throw new IllegalArgumentException();
+		}
+		
 		return estudiantesFeign.estudiantes().stream()
 				.filter(e->e.getCalificacion()>=min&&e.getCalificacion()<=max)
 				.toList();
