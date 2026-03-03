@@ -1,0 +1,8 @@
+remote:
+  urlbase: http://localhost:8001/escuela
+  user: admin
+  password: admin
+auth:
+  url: http://localhost:8080/realms/springrealm/protocol/openid-connect/token
+  clientId: springclient
+  grantType: password

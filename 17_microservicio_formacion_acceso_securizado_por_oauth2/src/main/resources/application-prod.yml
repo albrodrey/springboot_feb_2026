@@ -1,0 +1,8 @@
+remote:
+  urlbase: http://${HOST_REMOTE}:8001/escuela
+  user: ${USER_REMOTE}
+  password: ${PASS_REMOTE}
+auth:
+  url: http://${HOST_REMOTE}:8080/realms/springrealm/protocol/openid-connect/token
+  clientId: springclient
+  grantType: password
