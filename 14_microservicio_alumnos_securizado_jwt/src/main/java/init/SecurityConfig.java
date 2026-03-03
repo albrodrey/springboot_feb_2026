@@ -1,17 +1,22 @@
 package init;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import init.filter.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -24,8 +29,18 @@ public class SecurityConfig {
 	private String user;
 	@Value("${security.db.password}")
 	private String pass;
+	@Value("${jwt.properties.clave}")
+	String clave; 
+	
+	AuthenticationManager auth; 
+	@Bean 
+	public AuthenticationManager authManager(AuthenticationConfiguration conf) throws Exception{ 
+		auth=conf.getAuthenticationManager(); 
+		return auth;
+	}
+	
 	//definición usuarios/roles
-	/*@Bean
+	@Bean
 	public InMemoryUserDetailsManager  usersDetailsMemory() throws Exception {
 		List<UserDetails> users=List.of( 
 				User.withUsername("user1")		          
@@ -42,8 +57,8 @@ public class SecurityConfig {
 			          .build()
           );
 		return new InMemoryUserDetailsManager(users);		
-	}*/
-	@Bean
+	}
+	/*@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -61,7 +76,7 @@ public class SecurityConfig {
 		jdbcDetails.setAuthoritiesByUsernameQuery("select user, rol "
            	+ "from roles where user=?");
 		return jdbcDetails;
-	}
+	}*/
 	
 	//restricciones de acceso a recursos
 	@Bean
@@ -72,7 +87,7 @@ public class SecurityConfig {
 				.requestMatchers(HttpMethod.DELETE,"/alumnos").hasAnyRole("ADMINS","OPERATORS")
 				.requestMatchers(HttpMethod.GET,"/alumnos").authenticated()
 				.anyRequest().permitAll())
-		.httpBasic(Customizer.withDefaults());
+		.addFilter(new JwtAuthenticationFilter(auth, clave));
 		return http.build();
 		
 	}
