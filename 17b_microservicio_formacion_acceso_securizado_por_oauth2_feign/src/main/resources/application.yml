@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: 09_microservicio_formacion
+  profiles:
+    active:
+    - dev
+server:
+  port: 9001
+  servlet:
+    context-path: /formacion
